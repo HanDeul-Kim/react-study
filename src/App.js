@@ -41,14 +41,13 @@ function App() {
                         </div>
                     </>
                 } />
-                <Route path="/detail" element={<Detail />} />
-                <Route path="/about" element={<div>this page's about</div>} />
+                <Route path="/detail" element={<Detail shoes={shoes}/>} />
+                <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 
         </div>
     );
 }
-
 
 
 export default App;
