@@ -18,7 +18,15 @@ a{text-decoration: none; color:#000;}
     width: 100%;
     height: 400px;
 }
-
+.more_view{
+    padding:10px;
+    outline: none;
+    border:none;
+    background: tomato;
+    color:#fff;
+    border-radius: 10px;
+    margin:100px 0;
+}
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
