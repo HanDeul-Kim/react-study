@@ -40,7 +40,7 @@ a{text-decoration: none; color:#000;}
     background: #333;
     border-radius: 50%;
     transition: 0.5s linear both;
-    animation: loading 1s linear infinite;
+    animation: loading 0.7s linear infinite;
 }
 .loading span:nth-child(1){
     animation-delay: 0s;
@@ -51,6 +51,36 @@ a{text-decoration: none; color:#000;}
 .loading span:nth-child(3){
     animation-delay: 0.5s;
 }
+/* Detail  */
+.detail-c{
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.7s ease-in-out;
+}
+.detail-c.active{
+    opacity: 1;
+    visibility: visible;
+}
+/* Detail-page tab메뉴 */
+.nav-tabs{
+    border-color:#aaa !important;
+}
+.nav-link{
+    border-width: 2px !important;
+}
+.nav-link.active{
+    border-color:#aaa #aaa #fff #aaa !important;
+}
+.content-inner{
+    opacity: 0;
+    visibility: hidden;
+}
+.content-inner.active{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.5s;
+}
+
 @keyframes loading{
     0%{
         transform: translateY(0);

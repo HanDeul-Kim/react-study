@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, Navbar, Container, Nav } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
 import data from './data.js'
 import Detail from './pages/Detail.js'
@@ -49,6 +49,9 @@ function App() {
                             setCountView(countView + 1);
                             axios.get(`/data${countView + 1}.json`)
                                 .then((result) => {
+                                    for(var i = 0; i < 50000; i++) {
+                                        console.log(i);
+                                    }
                                     let copy = [...shoes, ...result.data];
                                     setShoes(copy);
                                     setLoading(false);
