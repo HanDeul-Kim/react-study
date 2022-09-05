@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
 import data from './data.js'
@@ -7,14 +7,12 @@ import Product from './components/Product.js'
 import Loading from './components/Loading.js'
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import axios from 'axios'
-export let Context1 = createContext()
+
 function App() {
     let [shoes, setShoes] = useState(data);
-    let [stock, setStock] = useState([10, 11, 12]);
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
-    
     return (
         <div className="App">
 
@@ -68,7 +66,7 @@ function App() {
 
                     </>
                 } />
-                <Route path="/detail/:id" element={<Context1.Provider value={{shoes, stock}}><Detail shoes={shoes} /></Context1.Provider>} />
+                <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 

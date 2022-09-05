@@ -1,10 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { Context1 } from '../App.js'
 function Detail(props) {
 
-    let { stock } = useContext(Context1)
     let { id } = useParams()
     let findProduct = props.shoes.find((x) => { return x.id == id })
     let [num, setNum] = useState('');
@@ -51,7 +49,7 @@ function Detail(props) {
     )
    
 }
-function TabContent({tab, shoes}) {
+function TabContent({tab}) {
     let [hidden, setHidden] = useState('')
     useEffect( () => {
         // react 18 버전 이후로 나온 새 기능인 automatic batching의 이유로 시간차를 두어야 useEffect가 clean-up함수 이후 정상적으로 작동.
