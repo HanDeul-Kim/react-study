@@ -3,6 +3,7 @@ import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
 import data from './data.js'
 import Detail from './pages/Detail.js'
+import Cart from './pages/Cart.js'
 import Product from './components/Product.js'
 import Loading from './components/Loading.js'
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
@@ -67,6 +68,7 @@ function App() {
                     </>
                 } />
                 <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 
