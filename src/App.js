@@ -22,7 +22,7 @@ function App() {
                     <Navbar.Brand href="/">Cos Wear</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => { navigate('/') }}>홈으로</Nav.Link>
-                        <Nav.Link onClick={() => { navigate('/detail') }}>상세 페이지</Nav.Link>
+                        <Nav.Link onClick={() => { navigate('/cart') }}>장바구니</Nav.Link>
                         {/* <Link to="/">홈으로</Link> */}
                         {/* <Link to="/detail">상세 페이지</Link> */}
                     </Nav>

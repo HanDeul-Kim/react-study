@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../store/cartSlice.js'
 function Detail(props) {
-
+    
     let { id } = useParams()
     let findProduct = props.shoes.find((x) => { return x.id == id })
     let [num, setNum] = useState('');
@@ -19,6 +21,9 @@ function Detail(props) {
         }
     }, [])
     let [tab, setTab] = useState(0);
+    // store state
+    let dispatch = useDispatch()
+
     return (
         <div className={`container detail-c ${hidden}`}>
             <input onChange={(e) => { setNum(e.target.value) }}></input>
@@ -30,7 +35,9 @@ function Detail(props) {
                     <h4 className="pt-5">{findProduct.title}</h4>
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={ () => {
+                        dispatch(addProduct( {id : props.shoes[id].id, name : props.shoes[id].title, count : 1} ))}
+                    }>주문하기</button>
                 </div>
             </div>
             <Nav justify variant="tabs" defaultActiveKey="link0">
