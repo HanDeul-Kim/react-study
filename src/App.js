@@ -38,7 +38,7 @@ function App() {
                                 {
                                     shoes.map((val, idx) => {
                                         return (
-                                            <Product shoes={shoes[idx]} idx={idx} />
+                                            <Product key={idx} shoes={shoes[idx]} idx={idx} />
                                         )
                                     })
                                 }

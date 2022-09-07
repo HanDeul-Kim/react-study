@@ -1,10 +1,12 @@
 import { Table } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { change } from '../store/userSlice.js'
+import { quantity } from '../store/cartSlice.js'
 function Cart() {
-    let a = useSelector( (state) => {return state})
+    let state = useSelector((state) => state)
+    let dispatch = useDispatch()
     return (
         <div>
-            
             <Table>
                 <thead>
                     <tr>
@@ -15,15 +17,20 @@ function Cart() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
-                    </tr>
+                    {
+                        state.cart.map((val, idx) =>
+                            <tr key={idx}>
+                                <th>{val.id}</th>
+                                <th>{val.name}</th>
+                                <th>{val.count}</th>
+                                <th><button onClick={ () => {dispatch(quantity(1))}}>+</button></th>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </Table>
         </div>
     )
 }
+
 export default Cart;
