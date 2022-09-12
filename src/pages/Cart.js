@@ -1,6 +1,6 @@
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCount } from '../store/cartSlice.js'
+import { addCount, removeCount } from '../store/cartSlice.js'
 function Cart() {
     return (
         <div>
@@ -22,21 +22,26 @@ function Cart() {
 function ItemList() {
     let state = useSelector((state) => state)
     let dispatch = useDispatch()
-    
+
     return (
         < tbody >
-        {
-            state.cart.map((val, idx) =>
-                <tr key={idx}>
-                    <th>{state.cart[idx].id}</th>
-                    <th>{state.cart[idx].name}</th>
-                    <th>{state.cart[idx].count}</th>
-                    <th><button onClick={() => {
-                        dispatch(addCount(state.cart[idx].id))
-                    }}>+</button></th>
-                </tr>
-            )
-        }
+            {
+                state.cart.map((val, idx) =>
+                    <tr key={idx}>
+                        <th>{state.cart[idx].id}</th>
+                        <th>{state.cart[idx].name}</th>
+                        <th>{state.cart[idx].count}</th>
+                        <th style={{display: 'flex', gap: '5px', justifyContent: 'center'}}>
+                            <button onClick={() => {
+                                dispatch(removeCount(state.cart[idx].id))
+                            }}>-</button>
+                            <button onClick={() => {
+                                dispatch(addCount(state.cart[idx].id))
+                            }}>+</button>
+                        </th>
+                    </tr>
+                )
+            }
         </tbody >
     )
 

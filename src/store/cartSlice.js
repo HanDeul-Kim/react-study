@@ -8,18 +8,22 @@ let cart = createSlice({
             let findProduct = state.findIndex((a) => { return a.id === action.payload })
             state[findProduct].count++
         },
+        removeCount(state, action) {
+            let findProduct = state.findIndex((a) => { return a.id === action.payload })
+            state[findProduct].count > 1 ? state[findProduct].count-- : state.splice(findProduct, 1)
+        },
         addProduct(state, action) {
-            // state.push(action.payload)
-
-
-            let returnValue = state.find((data, idx) => { return data.id === idx });
-            if (!state.includes(returnValue)) {
+            let returnValue = state.find((data) => { return data.id === action.payload.id });
+            let index = state.findIndex( x => x.id === action.payload.id);
+            if (state.includes(returnValue)) {
+                state[index].count++
+            } else{
                 state.push(action.payload)
-            } 
-            console.log(returnValue)
-
-        }
+            }
+            state.sort( (a, b) => {return a.id < b.id ? -1 : a.id > b.id ? 1 : 0});
+        },
+        
     }
 })
-export let { addCount, addProduct } = cart.actions
+export let { addCount, addProduct, removeCount } = cart.actions
 export default cart
