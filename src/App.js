@@ -14,6 +14,12 @@ function App() {
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
+
+    let [viewItem, setViewItem ] = useState([]);
+    localStorage.setItem('watched', JSON.stringify(viewItem));
+    console.log(JSON.parse(localStorage.getItem('watched')))
+    
+
     return (
         <div className="App">
 
