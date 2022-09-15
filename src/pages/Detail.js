@@ -7,13 +7,8 @@ function Detail(props) {
     
     let { id } = useParams()
     let findProduct = props.shoes.find((x) => { return x.id == id })
-    let [num, setNum] = useState('');
     let [hidden, setHidden] = useState('');
-    useEffect(() => {
-        if (isNaN(num) == true) {
-            alert('숫자만 입력해주세요.')
-        }
-    }, [num])
+
     useEffect(() => {
         setHidden('active')
         return () => {
@@ -21,12 +16,25 @@ function Detail(props) {
         }
     }, [])
     let [tab, setTab] = useState(0);
+    
     // store state
     let dispatch = useDispatch()
 
+    // 봤던 상품 id값 저장
+    useEffect(() => {
+        let viewId = localStorage.getItem('watchedId');
+        viewId = JSON.parse(viewId);
+        viewId.push(findProduct.id);
+        viewId = new Set(viewId);
+        viewId = Array.from(viewId);
+        // if(!viewId.includes(findProduct.id)) {
+        //     viewId.push(findProduct.id);
+        // }
+        localStorage.setItem('watchedId', JSON.stringify(viewId));
+    }, [])
+    
     return (
         <div className={`container detail-c ${hidden}`}>
-            <input onChange={(e) => { setNum(e.target.value) }}></input>
             <div className="row">
                 <div className="col-md-6">
                     <img src={`https://codingapple1.github.io/shop/shoes${Number(id) + 1}.jpg`} width="100%" />

@@ -4,25 +4,31 @@ import './App.css';
 import data from './data.js'
 import Detail from './pages/Detail.js'
 import Cart from './pages/Cart.js'
+import ViewItem from './pages/ViewItem.js'
 import Product from './components/Product.js'
 import Loading from './components/Loading.js'
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, Outlet, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 function App() {
+    
     let [shoes, setShoes] = useState(data);
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
+    let [viewItemId, setViewItemId] = useState([]);
+    const location = useLocation();
+    useEffect(() => {
+        if (localStorage.getItem('watchedId') == undefined) {
+            localStorage.setItem('watchedId', JSON.stringify([]))
+        }
 
-    let [viewItem, setViewItem ] = useState([]);
-    localStorage.setItem('watched', JSON.stringify(viewItem));
-    console.log(JSON.parse(localStorage.getItem('watched')))
-    
-
+        // let copy = [...viewItemId];
+        // setViewItemId(copy = copy.concat(JSON.parse(localStorage.getItem('watchedId'))));
+    }, [])
+    console.log(JSON.parse(localStorage.getItem('watchedId')));
     return (
         <div className="App">
-
             <Navbar bg="white" variant="white">
                 <Container>
                     <Navbar.Brand href="/">Cos Wear</Navbar.Brand>
@@ -34,7 +40,14 @@ function App() {
                     </Nav>
                 </Container>
             </Navbar>
-
+            <aside className='view_item' onClick={() => { navigate('/view') }}>
+                {
+                    location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId')) !== null == true ?
+                    <WatchedItem /> 
+                    :
+                    null
+                }
+            </aside>
             <Routes>
                 <Route path="/" element={
                     <>
@@ -50,22 +63,22 @@ function App() {
                                 }
                             </div>
                         </div>
-                        {loading == true ? <Loading /> : null} 
+                        {loading == true ? <Loading /> : null}
                         <button className="more_view" onClick={() => {
                             setLoading(true);
                             setCountView(countView + 1);
                             axios.get(`/data${countView + 1}.json`)
                                 .then((result) => {
-                                    for(var i = 0; i < 50000; i++) {
+                                    for (var i = 0; i < 50000; i++) {
                                         console.log(i);
                                     }
                                     let copy = [...shoes, ...result.data];
                                     setShoes(copy);
                                     setLoading(false);
                                 })
-                                .catch(() => { 
+                                .catch(() => {
                                     alert('sorry no data');
-                                    setLoading(false); 
+                                    setLoading(false);
                                 })
                             // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
                             // .then( () => {})
@@ -75,11 +88,23 @@ function App() {
                 } />
                 <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/view" element={<ViewItem viewItemId={viewItemId} setViewItemId={setViewItemId} />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 
+
         </div>
     );
+}
+function WatchedItem() {
+    return (
+        <>
+            <span>최근 본 상품</span>
+            <div className="img-inner">
+                <img src="./img/banner.jpg" alt="watched_product_image" />
+            </div>
+        </>
+    )
 }
 
 
