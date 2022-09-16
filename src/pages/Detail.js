@@ -32,6 +32,10 @@ function Detail(props) {
         // }
         localStorage.setItem('watchedId', JSON.stringify(viewId));
     }, [])
+    // 봤던 상품 이미지 num 저장 
+    useEffect( () => {
+        localStorage.setItem('itemImage', id)
+    }, [])
     
     return (
         <div className={`container detail-c ${hidden}`}>

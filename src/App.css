@@ -1,5 +1,5 @@
 *{padding:0; margin:0; box-sizing: border-box;}
-ul,ol,li{list-style: none;}
+ul,ol,li{list-style: none; padding:0; margin:0;}
 a{text-decoration: none; color:#000;}
 .App {
     text-align: center;
@@ -80,7 +80,7 @@ a{text-decoration: none; color:#000;}
     visibility: visible;
     transition: 0.5s;
 }
-/* 봤던 상품 image */
+/* App.js 봤던 상품 image */
 .view_item{
     position: fixed;
     bottom: 30px;
@@ -115,6 +115,29 @@ a{text-decoration: none; color:#000;}
     width:100%;
     max-width:800px;
     background: red;
+}
+.view-wrap h1{
+    margin:50px 0;
+}
+.view_items{
+    width: 100%;
+}
+.v_item{
+    width: 100%;
+    display:flex;
+}
+.item_content{
+    /* width: 70%; */
+    flex:0.7;
+    background: #ccc;
+}
+.item_img{
+    /* width: 30%; */
+    flex:0.3;
+    background: orange;
+}
+.item_img img{
+    width: 100%;
 }
 @keyframes loading{
     0%{

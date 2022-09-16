@@ -16,17 +16,12 @@ function App() {
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
-    let [viewItemId, setViewItemId] = useState([]);
-    const location = useLocation();
     useEffect(() => {
         if (localStorage.getItem('watchedId') == undefined) {
             localStorage.setItem('watchedId', JSON.stringify([]))
         }
-
-        // let copy = [...viewItemId];
-        // setViewItemId(copy = copy.concat(JSON.parse(localStorage.getItem('watchedId'))));
     }, [])
-    console.log(JSON.parse(localStorage.getItem('watchedId')));
+
     return (
         <div className="App">
             <Navbar bg="white" variant="white">
@@ -41,11 +36,12 @@ function App() {
                 </Container>
             </Navbar>
             <aside className='view_item' onClick={() => { navigate('/view') }}>
+                <WatchedItem />
                 {
-                    location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId')) !== null == true ?
-                    <WatchedItem /> 
-                    :
-                    null
+                    // location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId')) !== null == true ?
+                    // <WatchedItem /> 
+                    // :
+                    // null
                 }
             </aside>
             <Routes>
@@ -76,10 +72,7 @@ function App() {
                                     setShoes(copy);
                                     setLoading(false);
                                 })
-                                .catch(() => {
-                                    alert('sorry no data');
-                                    setLoading(false);
-                                })
+
                             // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
                             // .then( () => {})
                         }}>더 보기</button>
@@ -88,7 +81,7 @@ function App() {
                 } />
                 <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/view" element={<ViewItem viewItemId={viewItemId} setViewItemId={setViewItemId} />} />
+                <Route path="/view" element={<ViewItem />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 
@@ -97,14 +90,20 @@ function App() {
     );
 }
 function WatchedItem() {
-    return (
-        <>
-            <span>최근 본 상품</span>
-            <div className="img-inner">
-                <img src="./img/banner.jpg" alt="watched_product_image" />
-            </div>
-        </>
-    )
+    const location = useLocation();
+    // 옵셔널 체이닝 연산자 나의 구세주..
+    if(location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId'))?.length !== 0) {
+        return (
+            <>
+                <span>최근 본 상품</span>
+                <div className="img-inner">
+                    <img src={`https://codingapple1.github.io/shop/shoes${Number(localStorage.getItem('itemImage')) + 1}.jpg`} alt="watched_product_image" />
+                </div>
+            </>
+        )
+    } else {
+        return null
+    }
 }
 
 
