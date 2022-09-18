@@ -3,6 +3,7 @@ function ViewItem() {
     let [viewItemId, setViewItemId] = useState([]);
     useEffect(() => {
         let copy = [...viewItemId];
+        setViewItemId(copy = copy.concat(JSON.parse(localStorage.getItem('watchedId'))));
     }, [])
 
     return (
