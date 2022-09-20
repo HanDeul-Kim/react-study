@@ -1,40 +1,72 @@
-*{padding:0; margin:0; box-sizing: border-box;}
-ul,ol,li{list-style: none; padding:0; margin:0;}
-a{text-decoration: none; color:#000;}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Open+Sans&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+html,body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+}
 .App {
     text-align: center;
 }
+
 /* 부트스트랩 커스텀  */
+.main_nav{
+    padding: 10px 0;
+}
 .me-auto {
     margin-right: 0 !important;
-    display:flex;
-    gap:2em;
+    display: flex;
+    gap: 2em;
 }
-.nav-link{
+
+.nav-link {
     color: #000 !important;
 }
+
 /* main-banner */
 .main-banner {
     width: 100%;
     height: 400px;
 }
-.more_view{
-    padding:10px;
+
+.more_view {
+    position: relative;
     outline: none;
-    border:none;
+    border: none;
     background: tomato;
-    color:#fff;
-    border-radius: 10px;
-    margin:100px 0;
+    color: #fff;
+    margin: 100px 0;
+    font-weight: bold;
+    border-radius: 5px;
+    padding:8px 16px;
 }
+
 /* loading  */
-.loading{
-    display:flex;
+.loading {
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap:1.25em;
+    gap: 1.25em;
 }
-.loading span{
+
+.loading span {
     width: 20px;
     height: 20px;
     background: #333;
@@ -42,114 +74,167 @@ a{text-decoration: none; color:#000;}
     transition: 0.5s linear both;
     animation: loading 0.7s linear infinite;
 }
-.loading span:nth-child(1){
+
+.loading span:nth-child(1) {
     animation-delay: 0s;
 }
-.loading span:nth-child(2){
+
+.loading span:nth-child(2) {
     animation-delay: 0.25s;
 }
-.loading span:nth-child(3){
+
+.loading span:nth-child(3) {
     animation-delay: 0.5s;
 }
+
 /* Detail  */
-.detail-c{
+.detail-c {
     opacity: 0;
     visibility: hidden;
     transition: 0.7s ease-in-out;
 }
-.detail-c.active{
+
+.detail-c.active {
     opacity: 1;
     visibility: visible;
 }
+
 /* Detail-page tab메뉴 */
-.nav-tabs{
-    border-color:#aaa !important;
+.nav-tabs {
+    border-color: #aaa !important;
 }
-.nav-link{
+
+.nav-link {
     border-width: 2px !important;
 }
-.nav-link.active{
-    border-color:#aaa #aaa #fff #aaa !important;
+
+.nav-link.active {
+    border-color: #aaa #aaa #fff #aaa !important;
 }
-.content-inner{
+
+.content-inner {
     opacity: 0;
     visibility: hidden;
 }
-.content-inner.active{
+
+.content-inner.active {
     opacity: 1;
     visibility: visible;
     transition: 0.5s;
 }
+
 /* App.js 봤던 상품 image */
-.view_item{
+.view_item {
     position: fixed;
     bottom: 30px;
     right: 20px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
-.view_item span{
+.view_item span {
     font-size: 14px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
-.img-inner{
-    width: 65px;
-    height: 65px;
+.img-inner {
+    width: 100px;
+    height: 100px;
 }
-.view_item img{
+.view_item img {
     width: 100%;
-    height: 100%;
 }
 /* ViewItem 컴포넌트 */
-.view_container{
-    width:100%;
+.view_container {
+    width: 100%;
     height: 100%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.view-wrap{
-    width:100%;
-    max-width:800px;
-    background: red;
-}
-.view-wrap h1{
-    margin:50px 0;
-}
-.view_items{
+
+/* view-wrap 컨텐츠들 */
+.view-wrap {
     width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
 }
-.v_item{
+.view-wrap>h1 {
+    margin: 50px 0;
+}
+.view_items {
     width: 100%;
-    display:flex;
+    background: #ddd;
+    border-radius: 10px;
 }
-.item_content{
-    /* width: 70%; */
-    flex:0.7;
-    background: #ccc;
-}
-.item_img{
-    /* width: 30%; */
-    flex:0.3;
-    background: orange;
-}
-.item_img img{
+
+.v_item {
     width: 100%;
+    display: flex;
+    border-bottom: 1px solid #fff;
+    padding: 25px 50px;
+    cursor:pointer;
+    transition: 0.3s;
+    border-radius: 10px;
 }
-@keyframes loading{
-    0%{
+
+.v_item:hover{
+    color:#fff;
+    background: #333;
+}
+.v_item:nth-last-child(1) {
+    border-bottom: none;
+}
+
+.item_content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-wrap {
+    text-align: left;
+}
+
+.content-wrap>h1 {
+    font-size: 26px;
+}
+
+.content-wrap>div {
+    font-size: 16px;
+}
+
+.content-wrap>div:last-child {
+    font-weight: bold;
+}
+
+.item_img {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.item_img img {
+    width: 50%;
+}
+
+@keyframes loading {
+    0% {
         transform: translateY(0);
     }
-    50%{
+
+    50% {
         transform: translateY(-10px);
     }
-    100%{
+
+    100% {
         transform: translateY(0);
     }
 }
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

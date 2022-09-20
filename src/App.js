@@ -11,7 +11,7 @@ import { Routes, Route, Link, useNavigate, Outlet, useLocation } from 'react-rou
 import axios from 'axios'
 
 function App() {
-    
+
     let [shoes, setShoes] = useState(data);
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
@@ -24,7 +24,7 @@ function App() {
 
     return (
         <div className="App">
-            <Navbar bg="white" variant="white">
+            <Navbar className="main_nav" bg="white" variant="white">
                 <Container>
                     <Navbar.Brand href="/">Cos Wear</Navbar.Brand>
                     <Nav className="me-auto">
@@ -37,12 +37,6 @@ function App() {
             </Navbar>
             <aside className='view_item' onClick={() => { navigate('/view') }}>
                 <WatchedItem />
-                {
-                    // location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId')) !== null == true ?
-                    // <WatchedItem /> 
-                    // :
-                    // null
-                }
             </aside>
             <Routes>
                 <Route path="/" element={
@@ -76,12 +70,11 @@ function App() {
                             // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
                             // .then( () => {})
                         }}>더 보기</button>
-
                     </>
                 } />
                 <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/view" element={<ViewItem />} />
+                <Route path="/view" element={<ViewItem shoes={shoes} />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
 
@@ -92,7 +85,7 @@ function App() {
 function WatchedItem() {
     const location = useLocation();
     // 옵셔널 체이닝 연산자 나의 구세주..
-    if(location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId'))?.length !== 0) {
+    if (location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId'))?.length !== 0) {
         return (
             <>
                 <span>최근 본 상품</span>
