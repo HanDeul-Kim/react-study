@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
 import data from './data.js'
-import Detail from './pages/Detail.js'
-import Cart from './pages/Cart.js'
+// import Detail from './pages/Detail.js'
+// import Cart from './pages/Cart.js'
 import ViewItem from './pages/ViewItem.js'
 import Product from './components/Product.js'
 import Loading from './components/Loading.js'
 import { Routes, Route, Link, useNavigate, Outlet, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import Parents from './components/test.js'
+const Detail = lazy( () => import('./pages/Detail.js'));
+const Cart = lazy( () => import('./pages/Cart.js'));
 
 function App() {
 
@@ -24,6 +27,7 @@ function App() {
 
     return (
         <div className="App">
+            <Parents />
             <Navbar className="main_nav" bg="white" variant="white">
                 <Container>
                     <Navbar.Brand href="/">Cos Wear</Navbar.Brand>
@@ -38,6 +42,7 @@ function App() {
             <aside className='view_item' onClick={() => { navigate('/view') }}>
                 <WatchedItem />
             </aside>
+            <Suspense fallback={<div>loading...</div>}>
             <Routes>
                 <Route path="/" element={
                     <>
@@ -77,7 +82,7 @@ function App() {
                 <Route path="/view" element={<ViewItem shoes={shoes} />} />
                 <Route path="*" element={<div>없는 페이지입니다.</div>} />
             </Routes>
-
+            </Suspense>
 
         </div>
     );
