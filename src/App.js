@@ -9,7 +9,6 @@ import Product from './components/Product.js'
 import Loading from './components/Loading.js'
 import { Routes, Route, Link, useNavigate, Outlet, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import Parents from './components/test.js'
 const Detail = lazy( () => import('./pages/Detail.js'));
 const Cart = lazy( () => import('./pages/Cart.js'));
 
@@ -27,7 +26,6 @@ function App() {
 
     return (
         <div className="App">
-            <Parents />
             <Navbar className="main_nav" bg="white" variant="white">
                 <Container>
                     <Navbar.Brand href="/">Cos Wear</Navbar.Brand>

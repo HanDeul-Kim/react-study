@@ -1,19 +1,28 @@
-import { memo, useMemo, useState } from 'react'
-function Parents() {
-    let [test, setTest] = useState(0);
-    // let result = Child();
-    let result = useMemo( () => {return Child()}, [])
-    return (
-        <div>{result}</div>
-    )
- 
-}
-function Child() {
-    console.log('나 자식인데 나까지 함재렌더링 돼')
-    return (
-        <div>반복문 1억번 돌린 코드라고 가정</div>
+import { useState, useTransition, useDeferredValue } from 'react'
+
+
+function Test() {
+    let a = new Array(10000).fill(0)
+    let [name, setName] = useState('')
+    let [isPending, startTransition] = useTransition()
+    let state = useDeferredValue(name);
+    return(
+        <div className="App">
+            <input onChange={ (e) => {
+                // 혁신이다..
+                // startTransition( () => {
+                //     setName(e.target.value)
+                // }) 
+                setName(e.target.value)
+            }} />
+            {/* {isPending && <h1>please wait.</h1>} */}
+            {a.map( () => {
+                return (
+                    <div>{state}</div>
+                )
+            })}
+        </div>
     )
 }
 
-
-export default Parents; 
+export default Test;
