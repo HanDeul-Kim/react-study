@@ -41,45 +41,45 @@ function App() {
                 <WatchedItem />
             </aside>
             <Suspense fallback={<div>loading...</div>}>
-            <Routes>
-                <Route path="/" element={
-                    <>
-                        <div className="main-banner" style={{ background: `url(${process.env.PUBLIC_URL} './img/banner.jpg') no-repeat center center / cover` }}></div>
-                        <div className="container">
-                            <div className="row">
-                                {
-                                    shoes.map((val, idx) => {
-                                        return (
-                                            <Product key={idx} shoes={shoes[idx]} idx={idx} />
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
-                        {loading == true ? <Loading /> : null}
-                        <button className="more_view" onClick={() => {
-                            setLoading(true);
-                            setCountView(countView + 1);
-                            axios.get(`/data${countView + 1}.json`)
-                                .then((result) => {
-                                    for (var i = 0; i < 50000; i++) {
-                                        console.log(i);
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <div className="main-banner" style={{ background: `url(${process.env.PUBLIC_URL} './img/banner.jpg') no-repeat center center / cover` }}></div>
+                            <div className="container">
+                                <div className="row">
+                                    {
+                                        shoes.map((val, idx) => {
+                                            return (
+                                                <Product key={idx} shoes={shoes[idx]} idx={idx} />
+                                            )
+                                        })
                                     }
-                                    let copy = [...shoes, ...result.data];
-                                    setShoes(copy);
-                                    setLoading(false);
-                                })
+                                </div>
+                            </div>
+                            {loading == true ? <Loading /> : null}
+                            <button className="more_view" onClick={() => {
+                                setLoading(true);
+                                setCountView(countView + 1);
+                                axios.get(`/data${countView + 1}.json`)
+                                    .then((result) => {
+                                        for (var i = 0; i < 50000; i++) {
+                                            console.log(i);
+                                        }
+                                        let copy = [...shoes, ...result.data];
+                                        setShoes(copy);
+                                        setLoading(false);
+                                    })
 
-                            // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
-                            // .then( () => {})
-                        }}>더 보기</button>
-                    </>
-                } />
-                <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/view" element={<ViewItem shoes={shoes} />} />
-                <Route path="*" element={<div>없는 페이지입니다.</div>} />
-            </Routes>
+                                // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
+                                // .then( () => {})
+                            }}>더 보기</button>
+                        </>
+                    } />
+                    <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/view" element={<ViewItem shoes={shoes} />} />
+                    <Route path="*" element={<div>없는 페이지입니다.</div>} />
+                </Routes>
             </Suspense>
 
         </div>
