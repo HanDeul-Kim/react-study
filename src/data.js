@@ -3,7 +3,7 @@ let data = [
         id: 0,
         title: 'White and Block',
         content: 'Born in France',
-        price:  `120,000원`
+        price:  '120,000원'
     },
     {
         id: 1,

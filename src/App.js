@@ -60,7 +60,8 @@ function App() {
                             <button className="more_view" onClick={() => {
                                 setLoading(true);
                                 setCountView(countView + 1);
-                                axios.get(`/data${countView + 1}.json`)
+                                // axios.get(`/data${countView + 1}.json`)
+                                axios.get(`http://localhost:3000/data`)
                                     .then((result) => {
                                         for (var i = 0; i < 50000; i++) {
                                             console.log(i);
