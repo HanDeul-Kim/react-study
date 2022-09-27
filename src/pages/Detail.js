@@ -27,7 +27,7 @@ function Detail(props) {
         viewId.push(findProduct.id);
         viewId = new Set(viewId);
         viewId = Array.from(viewId);
-        // if(!viewId.includes(findProduct.id)) {
+        // if(!viewId.includes(findProduct.id)) {  
         //     viewId.push(findProduct.id);
         // }
         localStorage.setItem('watchedId', JSON.stringify(viewId));

@@ -7,7 +7,6 @@ function ViewItem(props) {
         let copy = [...viewItemId];
         setViewItemId(copy = copy.concat(JSON.parse(localStorage.getItem('watchedId'))).reverse());
     }, [])
-
     return (
         <div className='view_container'>
             <div className="view-wrap">

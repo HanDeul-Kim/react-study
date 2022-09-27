@@ -22,16 +22,15 @@ function Cart() {
 function ItemList() {
     let state = useSelector((state) => state)
     let dispatch = useDispatch()
-
     return (
-        < tbody >
+        <tbody>
             {
                 state.cart.map((val, idx) =>
                     <tr key={idx}>
                         <th>{state.cart[idx].id}</th>
                         <th>{state.cart[idx].name}</th>
                         <th>{state.cart[idx].count}</th>
-                        <th style={{display: 'flex', gap: '5px', justifyContent: 'center'}}>
+                        <th style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
                             <button onClick={() => {
                                 dispatch(removeCount(state.cart[idx].id))
                             }}>-</button>
@@ -42,7 +41,7 @@ function ItemList() {
                     </tr>
                 )
             }
-        </tbody >
+        </tbody>
     )
 
 }
