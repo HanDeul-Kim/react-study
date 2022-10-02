@@ -6,7 +6,7 @@ import { addProduct } from '../store/cartSlice.js'
 function Detail(props) {
     
     let { id } = useParams()
-    let findProduct = props.shoes.find((x) => { return x.id == id })
+    let findProduct = props.itemAll.find((x) => { return x.id == id })
     let [hidden, setHidden] = useState('');
 
     useEffect(() => {
@@ -48,8 +48,8 @@ function Detail(props) {
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price}</p>
                     <button className="btn btn-danger" onClick={ () => {
-                        dispatch(addProduct( {id : props.shoes[id].id, name : props.shoes[id].title, count : 1} ))}
-                    }>주문하기</button>
+                        dispatch(addProduct( {id : props.itemAll[id].id, name : props.itemAll[id].title, count : 1} ))}
+                    }>장바구니에 추가</button>
                 </div>
             </div>
             <Nav justify variant="tabs" defaultActiveKey="link0">

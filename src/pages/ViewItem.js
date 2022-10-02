@@ -18,9 +18,9 @@ function ViewItem(props) {
                                 <li className="v_item" key={val} onClick={ () => { navigate(`/detail/${val}`)}}>
                                     <div className="item_content">
                                         <div className="content-wrap">
-                                            <h1>{props.shoes[val].title}</h1>
-                                            <div>{props.shoes[val].content}</div>
-                                            <div>{props.shoes[val].price}</div>
+                                            <h1>{props.itemAll[val].title}</h1>
+                                            <div>{props.itemAll[val].content}</div>
+                                            <div>{props.itemAll[val].price}</div>
                                         </div>
                                     </div>
                                     <div className="item_img">
