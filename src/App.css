@@ -167,6 +167,7 @@ html,body{
     width: 100%;
     background: #ddd;
     border-radius: 10px;
+    margin: 50px 0;
 }
 
 .v_item {
@@ -221,34 +222,34 @@ html,body{
     width: 50%;
 }
 /* 장바구니 item (Cart.js) */
-.cart_list{
-    cursor: pointer;
-}
-.cart_list:hover{
-    background: #000;
-    color:#fff;
-}
-.cart_list:hover .button-wrap{
-    border:2px solid #fff;
-}
-.cart_list:hover .button-wrap button{
-    color:#fff;
-}
-.button-wrap{
-    width: 100px;
-    border-radius: 20px;
-    border:2px solid #000;
-    display:flex;
-    justify-content: space-around;
-}
-.button-wrap button{
-    flex:0.5;
+.cart_list button{
     border:0;
     outline: none;
     background: none;
 }
-.button-wrap span{
-    margin:5px;
+.cart_item{
+    cursor:pointer;
+}
+.cart_item span{
+    width: 100%;
+    position: relative;
+}
+.cart_item span:after{
+    content:'';
+    position: absolute;
+    left:0;
+    bottom: -3px;
+    width: 0%;
+    height: 1px;
+    background: tomato;
+    transition: 0.3s;
+}
+.cart_list:nth-child(1) .cart_item span:after{
+    height: 2px !important;
+}
+
+.cart_item span:hover:after{
+    width: 100%;
 }
 @keyframes loading {
     0% {

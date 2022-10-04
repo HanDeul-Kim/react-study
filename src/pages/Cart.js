@@ -1,5 +1,5 @@
 import { Table } from 'react-bootstrap'
-import { IoIosRemoveCircleOutline, IoIosAddCircle } from 'react-icons/io';
+import { IoIosAdd, IoIosRemove} from 'react-icons/io';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { addCount, removeCount } from '../store/cartSlice.js'
@@ -30,21 +30,19 @@ function ItemList() {
         <tbody>
             {
                 state.cart.map((val, idx) =>
-                    <tr className="cart_list" key={idx} onClick={ (e) => { 
-                            if(e.target.nodeName !== 'BUTTON') {
-                                navigate(`/detail/${val.id}`)
-                            }
-                        }}>
+                    <tr className="cart_list" key={idx}>
                         <th>{state.cart[idx].id}</th>
-                        <th>{state.cart[idx].name}</th>
+                        <th className="cart_item" onClick={ () => { navigate(`/detail/${val.id}`) }}>
+                            <span>{state.cart[idx].name}</span>
+                        </th>
                         <th>{state.cart[idx].count}</th>
                         <th style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
                             <button onClick={() => {
                                 dispatch(removeCount(state.cart[idx].id))
-                            }}><IoIosRemoveCircleOutline size="27" color="#000" /></button>
+                            }}><IoIosRemove size="27" color="#000" /></button>
                             <button onClick={() => {
                                 dispatch(addCount(state.cart[idx].id))
-                            }}><IoIosAddCircle size="27" color="#000" /></button>
+                            }}><IoIosAdd size="27" color="#000" /></button>
                         </th>
                     </tr>
                 )

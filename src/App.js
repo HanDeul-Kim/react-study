@@ -3,6 +3,7 @@ import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
 import data from './data.js'
 import dataAll from './dataAll.js'
+import datatest from './dataTest.js'
 import ViewItem from './pages/ViewItem.js'
 import Product from './components/Product.js'
 import Loading from './components/Loading.js'
@@ -17,11 +18,18 @@ function App() {
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
+    let [test, setTest] = useState(datatest)
     useEffect(() => {
         if (localStorage.getItem('watchedId') == undefined) {
             localStorage.setItem('watchedId', JSON.stringify([]))
         }
     }, [])
+    console.log(datatest);
+    console.log(datatest.shoes)
+    console.log(datatest['shirt'])
+    console.log([...datatest.shoes, ...datatest.shirt]);
+    // console.log(datatest.categoryAll());
+    console.log([...test.shoes, ...test.shirt]);
     return (
         <div className="App">
             <Navbar className="main_nav" bg="white" variant="white">
