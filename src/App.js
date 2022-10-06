@@ -1,9 +1,8 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
 import './App.css';
-import data from './data.js'
-import dataAll from './dataAll.js'
-import datatest from './dataTest.js'
+import data from './data/data.js'
+import dataAll from './data/dataAll.js'
 import ViewItem from './pages/ViewItem.js'
 import Product from './components/Product.js'
 import Loading from './components/Loading.js'
@@ -14,22 +13,18 @@ const Cart = lazy( () => import('./pages/Cart.js'));
 
 function App() {
     let [itemAll, setItemAll] = useState(dataAll);
-    let [items, setItems] = useState(data);
+    let [items, setItems] = useState(data.shoes);
+    let [tab, setTab] = useState('shoes');
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
-    let [test, setTest] = useState(datatest)
     useEffect(() => {
         if (localStorage.getItem('watchedId') == undefined) {
             localStorage.setItem('watchedId', JSON.stringify([]))
         }
     }, [])
-    console.log(datatest);
-    console.log(datatest.shoes)
-    console.log(datatest['shirt'])
-    console.log([...datatest.shoes, ...datatest.shirt]);
-    // console.log(datatest.categoryAll());
-    console.log([...test.shoes, ...test.shirt]);
+    
+    
     return (
         <div className="App">
             <Navbar className="main_nav" bg="white" variant="white">
@@ -51,12 +46,16 @@ function App() {
                     <Route path="/" element={
                         <>
                             <div className="main-banner" style={{ background: `url(${process.env.PUBLIC_URL} './img/banner.jpg') no-repeat center center / cover` }}></div>
+                            <div className="tab-inner">
+                                <div className="tab" onClick={ () => { setItems(data.shoes); setTab('shoes'); setCountView(1); }}>신발</div>
+                                <div className="tab" onClick={ () => { setItems(data.shirt); setTab('shirt'); setCountView(1); }}>상의</div>
+                            </div>
                             <div className="container">
                                 <div className="row">
                                     {
                                         items.map((val, idx) => {
                                             return (
-                                                <Product key={idx} items={items[idx]} idx={idx} />
+                                                <Product key={idx} items={items[idx]} idx={idx} id={items[idx].id} />
                                             )
                                         })
                                     }
@@ -66,7 +65,7 @@ function App() {
                             <button className="more_view" onClick={() => {
                                 setLoading(true);
                                 setCountView(countView + 1);
-                                axios.get(`/data${countView + 1}.json`)
+                                axios.get(`/data/${tab}_data${countView + 1}.json`)
                                     .then((result) => {
                                         for (var i = 0; i < 50000; i++) {
                                             console.log(i);
@@ -80,7 +79,7 @@ function App() {
                             }}>더 보기</button>
                         </>
                     } />
-                    <Route path="/detail/:id" element={<Detail itemAll={itemAll} />} />
+                    <Route path="/detail/:id" element={<Detail items={items} itemAll={itemAll} />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/view" element={<ViewItem itemAll={itemAll} />} />
                     <Route path="*" element={<div>없는 페이지입니다.</div>} />
@@ -97,7 +96,7 @@ function WatchedItem() {
             <>
                 <span>최근 본 상품</span>
                 <div className="img-inner">
-                    <img src={`https://codingapple1.github.io/shop/shoes${Number(localStorage.getItem('itemImage')) + 1}.jpg`} alt="watched_product_image" />
+                    <img src={`./img/product_${Number(localStorage.getItem('itemImage'))}.jpg`} alt="watched_product_image" />
                 </div>
             </>
         )

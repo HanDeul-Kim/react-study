@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit'
 import user from './store/userSlice.js'
 import cart from './store/cartSlice.js'
 // 로컬스토리지에 저장하고 싶은 경우
@@ -19,7 +19,10 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 
 export default configureStore({
-    reducer: persistedReducer   
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware({
+        serializableCheck: false,
+    })   
 })
 
 // export default configureStore({

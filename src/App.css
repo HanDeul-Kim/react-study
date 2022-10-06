@@ -86,7 +86,20 @@ html,body{
 .loading span:nth-child(3) {
     animation-delay: 0.5s;
 }
-
+/* 상품 category 분류 tab  */
+.tab-inner{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.tab{
+    flex:1;
+    background: #333;
+    color:#fff;
+    border:1px solid #fff;
+    cursor:pointer;
+    padding:10px 0;
+}
 /* Detail  */
 .detail-c {
     opacity: 0;

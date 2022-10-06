@@ -41,7 +41,7 @@ function Detail(props) {
         <div className={`container detail-c ${hidden}`}>
             <div className="row">
                 <div className="col-md-6">
-                    <img src={`https://codingapple1.github.io/shop/shoes${Number(id) + 1}.jpg`} width="100%" />
+                    <img src={`../img/product_${Number(id)}.jpg`} width="100%" alt="detail_page_product_img"/>
                 </div>
                 <div className="col-md-6">
                     <h4 className="pt-5">{findProduct.title}</h4>
