@@ -13,11 +13,12 @@ const Cart = lazy( () => import('./pages/Cart.js'));
 
 function App() {
     let [itemAll, setItemAll] = useState(dataAll);
-    let [items, setItems] = useState(data.shoes);
-    let [tab, setTab] = useState('shoes');
+    let [items, setItems] = useState(data.top);
+    let [tab, setTab] = useState('top');
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
+    let [hidden, setHidden] = useState(false);
     useEffect(() => {
         if (localStorage.getItem('watchedId') == undefined) {
             localStorage.setItem('watchedId', JSON.stringify([]))
@@ -47,8 +48,10 @@ function App() {
                         <>
                             <div className="main-banner" style={{ background: `url(${process.env.PUBLIC_URL} './img/banner.jpg') no-repeat center center / cover` }}></div>
                             <div className="tab-inner">
-                                <div className="tab" onClick={ () => { setItems(data.shoes); setTab('shoes'); setCountView(1); }}>신발</div>
-                                <div className="tab" onClick={ () => { setItems(data.shirt); setTab('shirt'); setCountView(1); }}>상의</div>
+                                {/* <div className="tab" onClick={ () => { setItems(data.shoes); setTab('all'); setCountView(1); }}>전체</div> */}
+                                <div className={`tab ${tab === 'top' ? 'active' : ''}`} onClick={ () => { setItems(data.top); setTab('top'); setCountView(1); }}>상의</div>
+                                <div className={`tab ${tab === 'bottom' ? 'active' : ''}`} onClick={ () => { setItems(data.bottom); setTab('bottom'); setCountView(1); }}>하의</div>
+                                <div className={`tab ${tab === 'shoes' ? 'active' : ''}`} onClick={ () => { setItems(data.shoes); setTab('shoes'); setCountView(1); }}>신발</div>
                             </div>
                             <div className="container">
                                 <div className="row">
@@ -67,7 +70,7 @@ function App() {
                                 setCountView(countView + 1);
                                 axios.get(`/data/${tab}_data${countView + 1}.json`)
                                     .then((result) => {
-                                        for (var i = 0; i < 50000; i++) {
+                                        for (var i = 0; i < 10000; i++) {
                                             console.log(i);
                                         }
                                         let copy = [...items, ...result.data];

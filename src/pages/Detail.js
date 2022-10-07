@@ -39,13 +39,13 @@ function Detail(props) {
     
     return (
         <div className={`container detail-c ${hidden}`}>
-            <div className="row">
-                <div className="col-md-6">
-                    <img src={`../img/product_${Number(id)}.jpg`} width="100%" alt="detail_page_product_img"/>
+            <div className="row" style={{display:'flex'}}>
+                <div className="col-md-6" style={{display:'flex', justifyContent:'center'}}>
+                    <img src={`../img/product_${Number(id)}.jpg`} width="50%" alt="detail_page_product_img"/>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6" style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                     <h4 className="pt-5">{findProduct.title}</h4>
-                    <p>{findProduct.content}</p>
+                    <p className='desc_p'>{findProduct.content}</p>
                     <p>{findProduct.price}</p>
                     <button className="btn btn-danger" onClick={ () => {
                         dispatch(addProduct( {id : props.itemAll[id].id, name : props.itemAll[id].title, count : 1} ))}
