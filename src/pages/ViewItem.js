@@ -24,7 +24,7 @@ function ViewItem(props) {
                                         </div>
                                     </div>
                                     <div className="item_img">
-                                        {/* <img src={`https://codingapple1.github.io/shop/shoes${val + 1}.jpg`} alt="" /> */}
+                                        <img src={`./img/product_${val}.jpg`} alt="" />
                                     </div>
                                 </li>
                             )

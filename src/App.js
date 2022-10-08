@@ -25,7 +25,6 @@ function App() {
         }
     }, [])
     
-    
     return (
         <div className="App">
             <Navbar className="main_nav" bg="white" variant="white">
@@ -77,6 +76,10 @@ function App() {
                                         setItems(copy);
                                         setLoading(false);
                                     })
+                                    .catch( (error) => {
+                                        setLoading(false);
+                                        alert('상품이 더 이상 없습니다.')
+                                    })
                                 // Promise.all([ axios.get('/url1') ], [ axios.get('/url2') ])
                                 // .then( () => {})
                             }}>더 보기</button>
@@ -93,7 +96,6 @@ function App() {
 }
 function WatchedItem() {
     const location = useLocation();
-    // 옵셔널 체이닝 연산자 나의 구세주..
     if (location.pathname == '/' && JSON.parse(localStorage.getItem('watchedId'))?.length !== 0) {
         return (
             <>
@@ -107,6 +109,4 @@ function WatchedItem() {
         return null
     }
 }
-
-
 export default App;

@@ -261,7 +261,7 @@ body {
 }
 
 .item_img {
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -385,6 +385,10 @@ body {
     }
     .tab-inner{
         margin: 15px 0 10px 0;
+    }
+    .img-inner{
+        width: 70px;
+        height: 70px;
     }
   
 }
