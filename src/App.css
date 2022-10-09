@@ -43,7 +43,36 @@ body {
 .nav-link {
     color: #000 !important;
 }
+/* 장바구니 알림 */
+.swal2-styled.swal2-confirm{
+    display:none !important;
+}
+.swal2-title strong{
+    font-size:20px !important;
+}
 
+.cart_notice{
+    position:absolute;
+    top: -2px;
+    right: -9px;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: tomato;
+    padding:9px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#fff;
+    font-size:13px;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+}
+.cart_notice.active{
+    opacity: 1;
+    visibility: visible;
+}
 /* main-banner */
 .main-banner {
     width: 100%;

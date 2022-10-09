@@ -15,11 +15,9 @@ let cart = createSlice({
         addProduct(state, action) {
             let returnValue = state.find((data) => { return data.id === action.payload.id });
             let index = state.findIndex( x => x.id === action.payload.id);
-            if (state.includes(returnValue)) {
-                state[index].count++
-            } else{
+            if (!state.includes(returnValue)) {
                 state.push(action.payload)
-            }
+            } 
             state.sort( (a, b) => {return a.id < b.id ? -1 : a.id > b.id ? 1 : 0});
         },
         

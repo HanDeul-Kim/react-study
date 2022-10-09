@@ -1,5 +1,6 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Button, Navbar, Container, Nav, Tab, Tabs } from 'react-bootstrap';
+import { useSelector } from 'react-redux'
 import './App.css';
 import data from './data/data.js'
 import dataAll from './data/dataAll.js'
@@ -18,13 +19,16 @@ function App() {
     let navigate = useNavigate();
     let [countView, setCountView] = useState(1);
     let [loading, setLoading] = useState(false);
-    let [hidden, setHidden] = useState(false);
     useEffect(() => {
         if (localStorage.getItem('watchedId') == undefined) {
             localStorage.setItem('watchedId', JSON.stringify([]))
         }
     }, [])
-    
+    let state = useSelector((state) => state)
+    useEffect(() => {
+        const notice = document.querySelector('.cart_notice');
+        state.cart.length === 0 ? notice.classList.remove('active') : notice.classList.add('active')
+    }, [state.cart])
     return (
         <div className="App">
             <Navbar className="main_nav" bg="white" variant="white">
@@ -32,7 +36,10 @@ function App() {
                     <Navbar.Brand onClick={() => { navigate('/') } } style={{cursor:'pointer'}}>Cos Wear</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => { navigate('/') }}>홈으로</Nav.Link>
-                        <Nav.Link onClick={() => { navigate('/cart') }}>장바구니</Nav.Link>
+                        <Nav.Link onClick={() => { navigate('/cart') }} style={{position:'relative'}}>
+                            장바구니
+                            <div className="cart_notice">{state.cart.length}</div>
+                        </Nav.Link>
                         {/* <Link to="/">홈으로</Link> */}
                         {/* <Link to="/detail">상세 페이지</Link> */}
                     </Nav>

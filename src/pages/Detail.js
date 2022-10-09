@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../store/cartSlice.js'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 function Detail(props) {
-    
+    let state = useSelector((state) => state)
     let { id } = useParams()
     let findProduct = props.itemAll.find((x) => { return x.id == id })
     let [hidden, setHidden] = useState('');
@@ -19,7 +21,8 @@ function Detail(props) {
     
     // store state
     let dispatch = useDispatch()
-
+    // 장바구니 alert
+    const MySwal = withReactContent(Swal)
     // 봤던 상품 id값 저장
     useEffect(() => {
         let viewId = localStorage.getItem('watchedId');
@@ -48,7 +51,26 @@ function Detail(props) {
                     <p className='desc_p'>{findProduct.content}</p>
                     <p>{findProduct.price}</p>
                     <button className="btn btn-danger" onClick={ () => {
-                        dispatch(addProduct( {id : props.itemAll[id].id, name : props.itemAll[id].title, count : 1} ))}
+                        dispatch(addProduct( {id : props.itemAll[id].id, name : props.itemAll[id].title, count : 1} ))
+                        MySwal.fire({
+                            title: <strong>장바구니에 담았습니다.</strong>,
+                            html: '',
+                            icon: 'success',
+                            timer: 1000,
+                            confirmButtonText: ''
+                        })
+                        state.cart.filter( (i) => {
+                            if(i.id === findProduct.id){
+                                MySwal.fire({
+                                    title: <strong>장바구니에 이미 있습니다.</strong>,
+                                    html: '',
+                                    icon: 'warning',
+                                    timer: 1000,
+                                    confirmButtonText: ''
+                                })
+                            }
+                        })
+                    }
                     }>장바구니에 추가</button>
                 </div>
             </div>
