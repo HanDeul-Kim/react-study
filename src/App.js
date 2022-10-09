@@ -45,7 +45,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={
                         <>
-                            <div className="main-banner" style={{ background: `url(${process.env.PUBLIC_URL} './img/banner.jpg') no-repeat center center / cover` }}></div>
+                            <div className="main-banner" style={{ background: 'url("./img/banner.jpg") no-repeat center center / cover' }}></div>
                             <div className="tab-inner">
                                 {/* <div className="tab" onClick={ () => { setItems(data.shoes); setTab('all'); setCountView(1); }}>전체</div> */}
                                 <div className={`tab ${tab === 'top' ? 'active' : ''}`} onClick={ () => { setItems(data.top); setTab('top'); setCountView(1); }}>상의</div>
@@ -67,10 +67,10 @@ function App() {
                             <button className="more_view" onClick={() => {
                                 setLoading(true);
                                 setCountView(countView + 1);
-                                axios.get(`/data/${tab}_data${countView + 1}.json`)
+                                axios.get(`./data/${tab}_data${countView + 1}.json`)
                                     .then((result) => {
                                         for (var i = 0; i < 10000; i++) {
-                                            console.log(i);
+                                            console.log('요청 중 로딩 테스트')
                                         }
                                         let copy = [...items, ...result.data];
                                         setItems(copy);
